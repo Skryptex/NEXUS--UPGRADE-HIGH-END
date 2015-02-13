@@ -120,10 +120,10 @@ Value getworkex(CWallet* pWallet, const Array& params, bool fHelp)
         );
 
     if (vNodes.empty())
-        throw JSONRPCError(-9, "HoboNickels is not connected!");
+        throw JSONRPCError(-9, "nexus is not connected!");
 
     if (IsInitialBlockDownload())
-        throw JSONRPCError(-10, "HoboNickels is downloading blocks...");
+        throw JSONRPCError(-10, "nexus is downloading blocks...");
 
     typedef map<uint256, pair<CBlock*, CScript> > mapNewBlock_t;
     static mapNewBlock_t mapNewBlock;
@@ -254,10 +254,10 @@ Value getwork(CWallet* pWallet, const Array& params, bool fHelp)
             "If [data] is specified, tries to solve the block and returns true if it was successful.");
 
     if (vNodes.empty())
-        throw JSONRPCError(RPC_CLIENT_NOT_CONNECTED, "HoboNickels is not connected!");
+        throw JSONRPCError(RPC_CLIENT_NOT_CONNECTED, "nexus is not connected!");
 
     if (IsInitialBlockDownload())
-        throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "HoboNickels is downloading blocks...");
+        throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "nexus is downloading blocks...");
 
     typedef map<uint256, pair<CBlock*, CScript> > mapNewBlock_t;
     static mapNewBlock_t mapNewBlock;    // FIXME: thread safety
@@ -398,10 +398,10 @@ Value getblocktemplate(CWallet* pWallet, const Array& params, bool fHelp)
         throw JSONRPCError(RPC_INVALID_PARAMETER, "Invalid mode");
 
     if (vNodes.empty())
-        throw JSONRPCError(RPC_CLIENT_NOT_CONNECTED, "HoboNickels is not connected!");
+        throw JSONRPCError(RPC_CLIENT_NOT_CONNECTED, "nexus is not connected!");
 
     if (IsInitialBlockDownload())
-        throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "HoboNickels is downloading blocks...");
+        throw JSONRPCError(RPC_CLIENT_IN_INITIAL_DOWNLOAD, "nexus is downloading blocks...");
 
     static CReserveKey reservekey(pWallet);
 

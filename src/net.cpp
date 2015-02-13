@@ -1173,7 +1173,7 @@ void ThreadMapPort2(void* parg)
             }
         }
 
-        string strDesc = "HoboNickels " + FormatFullVersion();
+        string strDesc = "nexus " + FormatFullVersion();
 #ifndef UPNPDISCOVER_SUCCESS
         /* miniupnpc 1.5 */
         r = UPNP_AddPortMapping(urls.controlURL, data.first.servicetype,
@@ -1255,12 +1255,7 @@ void MapPort()
 // The first name is used as information source for addrman.
 // The second name should resolve to a list of seed addresses.
 static const char *strDNSSeed[][2] = {
-    {"scryptseed", "seed.scrypt.io"},
-    {"hoboseed", "seed.hobonickels.info"},
-    {"hoboseed2", "seed2.hobonickels.info"},
-    {"hoboseed3", "seed3.hobonickels.info"},
-    {"hoboseed4", "seed4.hobonickels.info"},
-    {"cce",   "hbn.altcointech.net"},
+    {"", ""},
 };
 
 void ThreadDNSAddressSeed(void* parg)
@@ -1908,7 +1903,7 @@ bool BindListenPort(const CService &addrBind, string& strError)
     {
         int nErr = WSAGetLastError();
         if (nErr == WSAEADDRINUSE)
-            strError = strprintf(_("Unable to bind to %s on this computer. HoboNickels is probably already running."), addrBind.ToString());
+            strError = strprintf(_("Unable to bind to %s on this computer. nexus is probably already running."), addrBind.ToString());
         else
             strError = strprintf(_("Unable to bind to %s on this computer (bind returned error %d, %s)"), addrBind.ToString(), nErr, strerror(nErr));
         LogPrintf("%s\n", strError);
@@ -2042,7 +2037,7 @@ void StartNode(void* parg)
         LogPrintf("Error; NewThread(ThreadDumpAddress) failed\n");
 
     // ppcoin: mint proof-of-stake blocks in the background
-    // hbn: each wallet gets its own thread.
+    // NXS: each wallet gets its own thread.
     // Todo: Need to add a method to choose not to run stake off wallet.
 
     pWalletManager->RestartStakeMiner();

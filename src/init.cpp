@@ -94,7 +94,7 @@ void Shutdown(void* parg)
         TimerThread::StopTimer(); // for walletpassphrase unlock
         NewThread(ExitTimeout, NULL);
         MilliSleep(50);
-        LogPrintf("HoboNickels exited\n\n");
+        LogPrintf("nexus exited\n\n");
         fExit = true;
 #ifndef QT_GUI
         // ensure non-UI client gets exited here, but let Bitcoin-Qt reach 'return 0;' in bitcoin.cpp
@@ -149,12 +149,12 @@ bool AppInit(int argc, char* argv[])
         if (mapArgs.count("-?") || mapArgs.count("--help"))
         {
             // First part of help message is specific to bitcoind / RPC client
-            std::string strUsage = _("HoboNickels version") + " " + FormatFullVersion() + "\n\n" +
+            std::string strUsage = _("nexus version") + " " + FormatFullVersion() + "\n\n" +
                 _("Usage:") + "\n" +
-                  "  HoboNickelsd [options]                     " + "\n" +
-                  "  HoboNickelsd [options] <command> [params]  " + _("Send command to -server or HoboNickelsd") + "\n" +
-                  "  HoboNickelsd [options] help                " + _("List commands") + "\n" +
-                  "  HoboNickelsd [options] help <command>      " + _("Get help for a command") + "\n";
+                  "  nexusd [options]                     " + "\n" +
+                  "  nexusd [options] <command> [params]  " + _("Send command to -server or nexusd") + "\n" +
+                  "  nexusd [options] help                " + _("List commands") + "\n" +
+                  "  nexusd [options] help <command>      " + _("Get help for a command") + "\n";
 
             strUsage += "\n" + HelpMessage();
 
@@ -164,7 +164,7 @@ bool AppInit(int argc, char* argv[])
 
         // Command-line RPC
         for (int i = 1; i < argc; i++)
-            if (!IsSwitchChar(argv[i][0]) && !boost::algorithm::istarts_with(argv[i], "HoboNickels:"))
+            if (!IsSwitchChar(argv[i][0]) && !boost::algorithm::istarts_with(argv[i], "nexus:"))
                 fCommandLine = true;
 
         if (fCommandLine)
@@ -205,13 +205,13 @@ int main(int argc, char* argv[])
 
 bool static InitError(const std::string &str)
 {
-    uiInterface.ThreadSafeMessageBox(str, _("HoboNickels"), CClientUIInterface::MSG_ERROR);
+    uiInterface.ThreadSafeMessageBox(str, _("nexus"), CClientUIInterface::MSG_ERROR);
     return false;
 }
 
 bool static InitWarning(const std::string &str)
 {
-    uiInterface.ThreadSafeMessageBox(str, _("HoboNickels"), CClientUIInterface::MSG_WARNING);
+    uiInterface.ThreadSafeMessageBox(str, _("nexus"), CClientUIInterface::MSG_WARNING);
     return true;
 }
 
@@ -233,8 +233,8 @@ std::string HelpMessage()
 {
     string strUsage = _("Options:") + "\n";
         strUsage += "  -?                     " + _("This help message") + "\n";
-        strUsage += "  -conf=<file>           " + _("Specify configuration file (default: HoboNickels.conf)") + "\n";
-        strUsage += "  -pid=<file>            " + _("Specify pid file (default: HoboNickelsd.pid)") + "\n";
+        strUsage += "  -conf=<file>           " + _("Specify configuration file (default: nexus.conf)") + "\n";
+        strUsage += "  -pid=<file>            " + _("Specify pid file (default: nexusd.pid)") + "\n";
         strUsage += "  -gen                   " + _("Generate coins") + "\n";
         strUsage += "  -gen=0                 " + _("Don't generate coins") + "\n";
         strUsage += "  -datadir=<dir>         " + _("Specify data directory") + "\n";
@@ -245,7 +245,7 @@ std::string HelpMessage()
         strUsage += "  -socks=<n>             " + _("Select the version of socks proxy to use (4-5, default: 5)") + "\n";
         strUsage += "  -tor=<ip:port>         " + _("Use proxy to reach tor hidden services (default: same as -proxy)") + "\n";
         strUsage += "  -dns                   " + _("Allow DNS lookups for -addnode, -seednode and -connect") + "\n";
-        strUsage += "  -port=<port>           " + _("Listen for connections on <port> (default: 7372 or testnet: 7374)") + "\n";
+        strUsage += "  -port=<port>           " + _("Listen for connections on <port> (default: 9222 or testnet: 9223)") + "\n";
         strUsage += "  -maxconnections=<n>    " + _("Maintain at most <n> connections to peers (default: 125)") + "\n";
         strUsage += "  -addnode=<ip>          " + _("Add a node to connect to and attempt to keep the connection open") + "\n";
         strUsage += "  -connect=<ip>          " + _("Connect only to the specified node(s)") + "\n";
@@ -300,7 +300,7 @@ std::string HelpMessage()
 #endif
         strUsage += "  -rpcuser=<user>        " + _("Username for JSON-RPC connections") + "\n";
         strUsage += "  -rpcpassword=<pw>      " + _("Password for JSON-RPC connections") + "\n";
-        strUsage += "  -rpcport=<port>        " + _("Listen for JSON-RPC connections on <port> (default: 7373 or testnet: 7374)") + "\n";
+        strUsage += "  -rpcport=<port>        " + _("Listen for JSON-RPC connections on <port> (default: 9232 or testnet: 9233)") + "\n";
         strUsage += "  -rpcallowip=<ip>       " + _("Allow JSON-RPC connections from specified IP address") + "\n";
         strUsage += "  -rpcconnect=<ip>       " + _("Send commands to node running on <ip> (default: 127.0.0.1)") + "\n";
         strUsage += "  -blocknotify=<cmd>     " + _("Execute command when the best block changes (%s in cmd is replaced by block hash)") + "\n";
@@ -599,7 +599,7 @@ bool AppInit2()
     // ********************************************************* Step 4: application initialization: dir lock, daemonize, pidfile, debug log
     // Sanity check
     if (!InitSanityCheck())
-        return InitError(_("Initialization sanity check failed. HoboNickels is shutting down."));
+        return InitError(_("Initialization sanity check failed. nexus is shutting down."));
 
     std::string strDataDir = GetDataDir().string();
 
@@ -609,7 +609,7 @@ bool AppInit2()
     if (file) fclose(file);
     static boost::interprocess::file_lock lock(pathLockFile.string().c_str());
     if (!lock.try_lock())
-        return InitError(strprintf(_("Cannot obtain a lock on data directory %s.  HoboNickels is probably already running."), strDataDir));
+        return InitError(strprintf(_("Cannot obtain a lock on data directory %s.  nexus is probably already running."), strDataDir));
 
 #if !defined(WIN32) && !defined(QT_GUI)
     if (fDaemon)
@@ -636,7 +636,7 @@ bool AppInit2()
     if (GetBoolArg("-shrinkdebugfile", !fDebug))
         ShrinkDebugFile();
     LogPrintf("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-    LogPrintf("HoboNickels version %s (%s)\n", FormatFullVersion(), CLIENT_DATE);
+    LogPrintf("nexus version %s (%s)\n", FormatFullVersion(), CLIENT_DATE);
     LogPrintf("Using OpenSSL version %s\n", SSLeay_version(SSLEAY_VERSION));
     if (!fLogTimestamps)
         LogPrintf("Startup time: %s\n", DateTimeStrFormat("%x %H:%M:%S", GetTime()));
@@ -645,7 +645,7 @@ bool AppInit2()
     std::ostringstream strErrors;
 
     if (fDaemon)
-        fprintf(stdout, "HoboNickels server starting\n");
+        fprintf(stdout, "nexus server starting\n");
 
     int64_t nStart;
 
@@ -677,7 +677,7 @@ bool AppInit2()
                                      " Original wallet.dat saved as wallet.{timestamp}.bak in %s; if"
                                      " your balance or transactions are incorrect you should"
                                      " restore from a backup."), strDataDir);
-            uiInterface.ThreadSafeMessageBox(msg, _("HoboNickels"), CClientUIInterface::MSG_WARNING);
+            uiInterface.ThreadSafeMessageBox(msg, _("nexus"), CClientUIInterface::MSG_WARNING);
         }
         if (r == CDBEnv::RECOVER_FAIL)
             return InitError(_("wallet.dat corrupt, salvage failed"));

@@ -90,7 +90,7 @@ void setupAmountWidget(QLineEdit *widget, QWidget *parent)
 
 bool parseBitcoinURI(const QUrl &uri, SendCoinsRecipient *out)
 {
-    if(uri.scheme() != QString("hobonickels"))
+    if(uri.scheme() != QString("nexus"))
         return false;
 
     SendCoinsRecipient rv;
@@ -140,13 +140,13 @@ bool parseBitcoinURI(const QUrl &uri, SendCoinsRecipient *out)
 
 bool parseBitcoinURI(QString uri, SendCoinsRecipient *out)
 {
-    // Convert hobonickels:// to hobonickels:
+    // Convert nexus:// to nexus:
     //
-    //    Cannot handle this later, because hobonickels:// will cause Qt to see the part after // as host,
+    //    Cannot handle this later, because nexus:// will cause Qt to see the part after // as host,
     //    which will lower-case it (and thus invalidate the address).
-    if(uri.startsWith("hobonickels://"))
+    if(uri.startsWith("nexus://"))
     {
-        uri.replace(0, 11, "hobonickels:");
+        uri.replace(0, 11, "nexus:");
     }
     QUrl uriInstance(uri);
     return parseBitcoinURI(uriInstance, out);
@@ -418,7 +418,7 @@ TableViewLastColumnResizingFixer::TableViewLastColumnResizingFixer(QTableView* t
 #ifdef WIN32
 boost::filesystem::path static StartupShortcutPath()
 {
-    return GetSpecialFolderPath(CSIDL_STARTUP) / "HoboNickels.lnk";
+    return GetSpecialFolderPath(CSIDL_STARTUP) / "nexus.lnk";
 }
 
 bool GetStartOnSystemStartup()
@@ -500,7 +500,7 @@ boost::filesystem::path static GetAutostartDir()
 
 boost::filesystem::path static GetAutostartFilePath()
 {
-    return GetAutostartDir() / "HoboNickels.desktop";
+    return GetAutostartDir() / "nexus.desktop";
 }
 
 bool GetStartOnSystemStartup()
@@ -541,7 +541,7 @@ bool SetStartOnSystemStartup(bool fAutoStart)
         // Write a bitcoin.desktop file to the autostart directory:
         optionFile << "[Desktop Entry]\n";
         optionFile << "Type=Application\n";
-        optionFile << "Name=HoboNickels\n";
+        optionFile << "Name=nexus\n";
         optionFile << "Exec=" << pszExePath << " -min\n";
         optionFile << "Terminal=false\n";
         optionFile << "Hidden=false\n";
@@ -584,10 +584,10 @@ void restoreWindowGeometry(const QString& strSetting, const QSize& defaultSize, 
 HelpMessageBox::HelpMessageBox(QWidget *parent) :
     QMessageBox(parent)
 {
-    header = tr("HoboNickels-Qt") + " " + tr("version") + " " +
+    header = tr("nexus-Qt") + " " + tr("version") + " " +
         QString::fromStdString(FormatFullVersion()) + "\n\n" +
         tr("Usage:") + "\n" +
-        "  HoboNickels-qt [" + tr("command-line options") + "]                     " + "\n";
+        "  nexus-qt [" + tr("command-line options") + "]                     " + "\n";
 
     coreOptions = QString::fromStdString(HelpMessage());
 
@@ -596,7 +596,7 @@ HelpMessageBox::HelpMessageBox(QWidget *parent) :
         "  -min                   " + tr("Start minimized") + "\n" +
         "  -splash                " + tr("Show splash screen on startup (default: 1)") + "\n";
 
-    setWindowTitle(tr("HoboNickels-Qt"));
+    setWindowTitle(tr("nexus-Qt"));
     setTextFormat(Qt::PlainText);
     // setMinimumWidth is ignored for QMessageBox so put in non-breaking spaces to make it wider.
     setText(header + QString(QChar(0x2003)).repeated(50));

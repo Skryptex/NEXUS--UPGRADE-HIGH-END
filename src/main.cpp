@@ -45,7 +45,7 @@ static CBigNum bnProofOfStakeLimitTestNet(~uint256(0) >> 20);
 unsigned int nStakeMinAge = 60 * 60 * 24 * 10; // minimum age for coin age - 10 days
 unsigned int nStakeMaxAge = 60 * 60 * 24 * 30; // stake age of full weight - 30 days
 unsigned int nStakeTargetSpacing = 1 * 30; // 1-minute block spacing
-int64_t nChainStartTime = 1371910049;
+int64_t nChainStartTime = 1423600000;
 int nCoinbaseMaturity = 5;
 CBlockIndex* pindexGenesisBlock = NULL;
 int nBestHeight = -1;
@@ -71,7 +71,7 @@ map<uint256, set<uint256> > mapOrphanTransactionsByPrev;
 // Constant stuff for coinbase transactions we create:
 CScript COINBASE_FLAGS;
 
-const string strMessageMagic = "HoboNickels Signed Message:\n";
+const string strMessageMagic = "nexus Signed Message:\n";
 
 double dHashesPerSec;
 int64_t nHPSTimerStart;
@@ -1133,7 +1133,7 @@ int64_t GetProofOfStakeRewardV1(int64_t nCoinAge, unsigned int nBits, unsigned i
         bnTargetLimit.SetCompact(bnTargetLimit.GetCompact());
 
 
-        // HoboNickels: reward for coin-year is cut in half every 64x multiply of PoS difficulty
+        // nexus: reward for coin-year is cut in half every 64x multiply of PoS difficulty
         // A reasonably continuous curve is used to avoid shock to market
         // (bnRewardCoinYearLimit / nRewardCoinYear) ** 4 == bnProofOfStakeLimit / bnTarget
         //
@@ -1198,7 +1198,7 @@ int64_t GetProofOfStakeRewardV2(int64_t nCoinAge, unsigned int nBits, unsigned i
     bnTargetLimit.SetCompact(bnTargetLimit.GetCompact());
     int64_t nSubsidyLimit = 250 * COIN;
 
-    // HoboNickels: reward for coin-year is cut in half every 64x multiply of PoS difficulty
+    // nexus: reward for coin-year is cut in half every 64x multiply of PoS difficulty
     // A reasonably continuous curve is used to avoid shock to market
     // (bnRewardCoinYearLimit / nRewardCoinYear) ** 4 == bnProofOfStakeLimit / bnTarget
     //
@@ -2641,7 +2641,7 @@ bool CBlock::SignPoSBlock(CWallet& wallet)
     return false;
 }
 
-// hbn: sign block for PoW
+// NXS: sign block for PoW
 bool CBlock::SignBlock(const CKeyStore& keystore)
 {
     vector<valtype> vSolutions;
@@ -2742,7 +2742,7 @@ bool CheckDiskSpace(uint64_t nAdditionalBytes)
         string strMessage = _("Warning: Disk space is low!");
         strMiscWarning = strMessage;
         LogPrintf("*** %s\n", strMessage);
-        uiInterface.ThreadSafeMessageBox(strMessage, "HoboNickels", CClientUIInterface::MSG_WARNING);
+        uiInterface.ThreadSafeMessageBox(strMessage, "nexus", CClientUIInterface::MSG_WARNING);
         StartShutdown();
         return false;
     }
@@ -2833,7 +2833,7 @@ bool LoadBlockIndex(bool fAllowNew)
 
         // Genesis block
 
-        const char* pszTimestamp = !fTestNet ? "HoboNickels are Go!" : "Tranz Testnet";
+        const char* pszTimestamp = !fTestNet ? "nexus are Go!" : "Tranz Testnet";
 
         CTransaction txNew;
         txNew.nTime = nChainStartTime;
@@ -2846,14 +2846,14 @@ bool LoadBlockIndex(bool fAllowNew)
         block.hashPrevBlock = 0;
         block.hashMerkleRoot = block.BuildMerkleTree();
         block.nVersion = 1;
-        block.nTime    = 1374635824;
+        block.nTime    = 1423600000;
         block.nBits    = bnProofOfWorkLimit.GetCompact();
-        block.nNonce   = 4215582;
+        block.nNonce   = 302731;
         if (fTestNet)
         {
-            block.nTime    = 1380383684;
+            block.nTime    = 1423600000;
             block.nBits    = bnProofOfWorkLimit.GetCompact();
-            block.nNonce   = 47018;
+            block.nNonce   = 174443;
         }
 
 	   if (true  && (block.GetHash() != hashGenesisBlock)) {
@@ -2882,11 +2882,11 @@ bool LoadBlockIndex(bool fAllowNew)
 
         if (fTestNet)
         {
-           assert(block.hashMerkleRoot == uint256("0x25756655bce43a9b72363c06979768cafba833a10de2e754fbef715a217ed241"));
+           assert(block.hashMerkleRoot == uint256("0x3a4fc4283d04f50d16503c1bb01bf9bef7ea8598609d9446a44cf90707c99291"));
         }
         else
         {
-           assert(block.hashMerkleRoot == uint256("0xbe06386a1644f7448ff25d28862b6c28e3a334e4a58f1c5ebd99ee49daa370c7"));
+           assert(block.hashMerkleRoot == uint256("0x3a4fc4283d04f50d16503c1bb01bf9bef7ea8598609d9446a44cf90707c99291"));
         }
 
         assert(block.GetHash() == (!fTestNet ? hashGenesisBlock : hashGenesisBlockTestNet));

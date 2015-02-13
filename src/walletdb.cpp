@@ -803,7 +803,7 @@ bool DumpWallet(CWallet* pwallet, const string& strDest)
          return false;
 
       // produce output
-      file << strprintf("# Wallet dump created by HoboNickels %s (%s)\n", CLIENT_BUILD, CLIENT_DATE);
+      file << strprintf("# Wallet dump created by nexus %s (%s)\n", CLIENT_BUILD, CLIENT_DATE);
       file << strprintf("# * Created on %s\n", EncodeDumpTime(GetTime()));
       file << strprintf("# * Best block at time of backup was %i (%s),\n", nBestHeight, hashBestChain.ToString());
       file << strprintf("#   mined on %s\n", EncodeDumpTime(pindexBest->nTime));

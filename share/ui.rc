@@ -1,4 +1,4 @@
-HoboNickels               ICON    "pixmaps/HoboNickels.ico"
+nexus               ICON    "pixmaps/nexus.ico"
 
 #include "wx/msw/wx.rc"
 

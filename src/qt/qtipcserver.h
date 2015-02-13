@@ -4,9 +4,9 @@
 #include <string>
 
 // Define Bitcoin-Qt message queue name for mainnet
-#define BITCOINURI_QUEUE_NAME_MAINNET "HoboNickelsURI"
+#define BITCOINURI_QUEUE_NAME_MAINNET "nexusURI"
 // Define Bitcoin-Qt message queue name for testnet
-#define BITCOINURI_QUEUE_NAME_TESTNET "HoboNickels-testnet"
+#define BITCOINURI_QUEUE_NAME_TESTNET "nexus-testnet"
 
 extern std::string strBitcoinURIQueueName;
 

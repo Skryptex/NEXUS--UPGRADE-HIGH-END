@@ -61,21 +61,23 @@ static const int64_t MAX_COMBINE_AMOUNT = MAX_SPLIT_AMOUNT * 2;
 
 
 /** Hard Fork Change Times/Block */
-static const unsigned int PROTOCOL_SWITCH_TIME = 1371686400; // 20 Jun 2013 00:00:00
-static const unsigned int REWARD_SWITCH_TIME = 1369432800; // 25 May 2013 00:00:00
-static const unsigned int POS_REWARD_SWITCH_TIME = 1378684800; // 9 SEP 2013 00:00:00
-static const unsigned int POS_REWARD_FIX_TIME = 1383177600; // 31 OCT 2013 00:00:00
-static const unsigned int POS_REWARD_FIX_TIME2 = 1383606000; // 04 Nov 2013 23:00:00
-static const unsigned int VERSION1_5_SWITCH_TIME = 1421489410; //  Sat, 17 Jan 2015 10:10:10 GMT
-static const unsigned int VERSION1_5_SWITCH_BLOCK = 1600000; //  Block 1.6 million, approx same time
+static const unsigned int PROTOCOL_SWITCH_TIME = 1423603000; // 20 Jun 2013 00:00:00
+
+static const unsigned int REWARD_SWITCH_TIME = 1423599900; // 25 May 2013 00:00:00
+
+static const unsigned int POS_REWARD_SWITCH_TIME = 1423862000; // 9 SEP 2013 00:00:00
+static const unsigned int POS_REWARD_FIX_TIME = 1423862000; // 31 OCT 2013 00:00:00
+static const unsigned int POS_REWARD_FIX_TIME2 = 1423862000; // 04 Nov 2013 23:00:00
+static const unsigned int VERSION1_5_SWITCH_TIME = 1423862000; //  Sat, 17 Jan 2015 10:10:10 GMT
+static const unsigned int VERSION1_5_SWITCH_BLOCK = 31; //  Block 1.6 million, approx same time
 
 
 inline bool MoneyRange(int64_t nValue) { return (nValue >= 0 && nValue <= MAX_MONEY); }
 /** Threshold for nLockTime: below this value it is interpreted as block number, otherwise as UNIX timestamp. */
 static const unsigned int LOCKTIME_THRESHOLD = 500000000; // Tue Nov  5 00:53:20 1985 UTC
 
-static const uint256 hashGenesisBlockOfficial("0x000009ea5ef5019446b315e7e581fc2ea184315ed46c9ddeadc8aa9442deedc9");
-static const uint256 hashGenesisBlockTestNet("0x0000f9e0292f278190e4d58cd1e1e9a32b7466c8092bd2371ffc80b06f8eca4a");
+static const uint256 hashGenesisBlockOfficial("0x0000017120b3e0648be68cbcdb4a26ca026d5b47ffbd70157cb506aaa60bcee9");
+static const uint256 hashGenesisBlockTestNet("0x0000a85186729d8e788b7aeecdda09b5ea6db137c26fb611855085242f5c4f10");
 
 inline int64_t PastDrift(int64_t nTime)
 {
@@ -901,7 +903,7 @@ public:
     unsigned int GetStakeEntropyBit(unsigned int nHeight) const
     {
 
-        // Protocol switch to support p2pool at HoboNickels block #9689
+        // Protocol switch to support p2pool at nexus block #9689
         if (nHeight >= 9689 || fTestNet)
         {
             // Take last bit of block hash as entropy bit
@@ -909,7 +911,7 @@ public:
             LogPrint("stakemodifier", "GetStakeEntropyBit: nHeight=%u hashBlock=%s nEntropyBit=%u\n", nHeight, GetHash().ToString(), nEntropyBit);
             return nEntropyBit;
         }
-        // Before HoboNickels block #9689 - old protocol
+        // Before nexus block #9689 - old protocol
         uint160 hashSig = Hash160(vchBlockSig);
         LogPrint("stakemodifier", "GetStakeEntropyBit: hashSig=%s", hashSig.ToString());
         hashSig >>= 159; // take the first bit of the hash
